@@ -14,7 +14,7 @@ class MainContainer extends React.Component{
 
     createNewCard=(input)=>{
 
-        fetch('http://localhost:5000/cards',{
+        fetch('https://task-track-backend.herokuapp.com/card',{
             method:'POST',
             headers:{
                 'Content-type':'application/json',
@@ -37,7 +37,7 @@ class MainContainer extends React.Component{
 
 
     addList=(cardID,input)=>{
-        fetch('http://localhost:5000/cards/lists',{
+        fetch('https://task-track-backend.herokuapp.com/card/lists',{
             method:'POST',
             headers:{
 
@@ -72,13 +72,17 @@ class MainContainer extends React.Component{
 
     componentDidMount() {
 
-        fetch('http://localhost:5000/cards')
+        fetch('https://task-track-backend.herokuapp.com/card',{
+            method:"GET"
+        })
             .then(resp=>resp.json())
             .then(cards=>{
                 this.setState({
                     cards:cards
                 })
-            })
+            }).catch(e=>{
+                console.log(e)
+        })
 
     }
 
@@ -95,7 +99,7 @@ class MainContainer extends React.Component{
             newState=true;
         }
 
-        fetch(`http://localhost:5000/cards/lists/${listID}`,{
+        fetch(`https://task-track-backend.herokuapp.com/card/lists/${listID}`,{
             method:"PATCH",
             headers:{
                 'Content-type':'application/json',
