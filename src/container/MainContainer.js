@@ -1,7 +1,7 @@
 import React from 'react';
 import CreateCard from '../components/CreateCard';
 import ToDoCardContainer from'./ToDoCardContainer'
-//import fetch from 'node-fetch'
+import axios from 'axios'
 
 
 class MainContainer extends React.Component{
@@ -78,17 +78,8 @@ class MainContainer extends React.Component{
         const fd= new FormData();
         fd.append("File",this.state.File)
 
-        fetch('https://task-track-backend.herokuapp.com/card/add', {
-            method: 'POST',
-            headers: {
-
-                'Content-type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify({
-                fd
-            })
-        }).then(res => console.log(res))
+        axios.post('https://task-track-backend.herokuapp.com/card/add', fd)
+            .then(res => console.log(res))
 
     }
 
